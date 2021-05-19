@@ -4,10 +4,10 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import { GetStaticProps } from 'next'
 
 
-
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostsData = getSortedPostsData()
   return {
     props: {
@@ -15,10 +15,18 @@ export async function getStaticProps() {
     }
   }
 }
+
 // getStaticProps can only be exported from a page. You can’t export it from non-page files
 
 
-export default function Home({ allPostsData }) {
+export default function Home({ allPostsData 
+}: {
+  allPostsData: {
+    date: string
+    title: string
+    id: string
+  }[]
+}) {
   return (
     <Layout home>
       <Head>
@@ -26,10 +34,10 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>[Hi👋, I'm a front-end developer and content creator]</p>
-        <p>
+        {/* <p>
           (This is a sample website - you’ll be building a site like this on{' '}
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
+        </p> */}
       </section>
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
